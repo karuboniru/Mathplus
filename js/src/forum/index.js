@@ -10,8 +10,11 @@ function isArray(obj){
 }
 
 function renderMath(element) {
+
   if(window.hasOwnProperty('MathJax')) {
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
+    console.log("Drawing")
+    MathJax.typeset()
+    //MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
   } else {
     setTimeout(() => {
       renderMath(element)
@@ -33,10 +36,16 @@ app.initializers.add('our-extension', function(app) {
   head.appendChild(script);
   script = document.createElement("script");
   script.type = "text/javascript";
-  script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML";
+  script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
   head.appendChild(script);
 
-  extend(CommentPost.prototype, 'oncreate', function (original, element, b) {
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+
+  /*extend(CommentPost.prototype, 'oncreate', function (original, element, b) {
     renderMath(element);
   });
 
@@ -54,12 +63,12 @@ app.initializers.add('our-extension', function(app) {
 
   extend(CommentPost.prototype, 'onbeforeremove', function (original, element, b) {
     renderMath(element);
-  });
+  });*/
 
   if (s9e && s9e.TextFormatter) {
 
     extend(s9e.TextFormatter, 'preview', function (original, preview, element) {
-      let finalEl = $(element).html();
+      /*let finalEl = $(element).html();
       let dst = finalEl.match(/\$\$(.*?)\$\$/g);
       let src = preview.match(/\$\$(.*?)\$\$/g);
 
@@ -67,7 +76,7 @@ app.initializers.add('our-extension', function(app) {
         for(let i = 0; i < dst.length; i++) {
           $(element).html($(element).html().replace(dst[i], src[i]));
         }
-      }
+      }*/
 
       renderMath(element);
     });

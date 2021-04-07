@@ -131,7 +131,8 @@ function isArray(obj) {
 
 function renderMath(element) {
   if (window.hasOwnProperty('MathJax')) {
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
+    console.log("Drawing");
+    MathJax.typeset(); //MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
   } else {
     setTimeout(function () {
       renderMath(element);
@@ -150,36 +151,39 @@ app.initializers.add('our-extension', function (app) {
   head.appendChild(script);
   script = document.createElement("script");
   script.type = "text/javascript";
-  script.src = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML";
+  script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
   head.appendChild(script);
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'oncreate', function (original, element, b) {
+  window.MathJax = {
+    tex: {
+      tags: 'ams'
+    }
+  };
+  /*extend(CommentPost.prototype, 'oncreate', function (original, element, b) {
     renderMath(element);
   });
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'onbeforeupdate', function (original, element, b) {
+   extend(CommentPost.prototype, 'onbeforeupdate', function (original, element, b) {
     renderMath(element);
   });
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'onupdate', function (original, element, b) {
+   extend(CommentPost.prototype, 'onupdate', function (original, element, b) {
     renderMath(element);
   });
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'oninit', function (original, element, b) {
+   extend(CommentPost.prototype, 'oninit', function (original, element, b) {
     renderMath(element);
   });
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'onbeforeremove', function (original, element, b) {
+   extend(CommentPost.prototype, 'onbeforeremove', function (original, element, b) {
     renderMath(element);
-  });
+  });*/
 
   if (s9e && s9e.TextFormatter) {
     Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(s9e.TextFormatter, 'preview', function (original, preview, element) {
-      var finalEl = $(element).html();
-      var dst = finalEl.match(/\$\$(.*?)\$\$/g);
-      var src = preview.match(/\$\$(.*?)\$\$/g);
-
-      if (isArray(dst) && isArray(src)) {
-        for (var i = 0; i < dst.length; i++) {
+      /*let finalEl = $(element).html();
+      let dst = finalEl.match(/\$\$(.*?)\$\$/g);
+      let src = preview.match(/\$\$(.*?)\$\$/g);
+       if(isArray(dst) && isArray(src)) {
+        for(let i = 0; i < dst.length; i++) {
           $(element).html($(element).html().replace(dst[i], src[i]));
         }
-      }
-
+      }*/
       renderMath(element);
     });
   }
