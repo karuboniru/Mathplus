@@ -125,22 +125,33 @@ __webpack_require__.r(__webpack_exports__);
 
 var $ = __webpack_require__(/*! jquery */ "jquery");
 
+var mathLock = false;
+var nextDraw = 0;
+
 function isArray(obj) {
   return !!obj && obj.constructor === Array;
 }
 
-function renderMath(element) {
-  if (window.hasOwnProperty('MathJax')) {
-    console.log("Drawing");
-    MathJax.typeset(); //MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
+function renderMath() {
+  if (window.hasOwnProperty('MathJax') && typeof MathJax.typeset === 'function') {
+    MathJax.typeset();
+    mathLock = false;
   } else {
-    setTimeout(function () {
-      renderMath(element);
-    }, 100);
+    mathLock = false;
+    nextDraw = 0;
   }
-} // We provide our extension code in the form of an "initializer".
-// This is a callback that will run after the core has booted.
+}
 
+setInterval(function () {
+  var ts = new Date().getTime();
+
+  if (!mathLock && nextDraw < ts) {
+    nextDraw = ts + 20000;
+    mathLock = true;
+    renderMath();
+  }
+}, 100); // We provide our extension code in the form of an "initializer".
+// This is a callback that will run after the core has booted.
 
 app.initializers.add('our-extension', function (app) {
   var head = document.getElementsByTagName("head")[0],
@@ -158,33 +169,10 @@ app.initializers.add('our-extension', function (app) {
       tags: 'ams'
     }
   };
-  /*extend(CommentPost.prototype, 'oncreate', function (original, element, b) {
-    renderMath(element);
-  });
-   extend(CommentPost.prototype, 'onbeforeupdate', function (original, element, b) {
-    renderMath(element);
-  });
-   extend(CommentPost.prototype, 'onupdate', function (original, element, b) {
-    renderMath(element);
-  });
-   extend(CommentPost.prototype, 'oninit', function (original, element, b) {
-    renderMath(element);
-  });
-   extend(CommentPost.prototype, 'onbeforeremove', function (original, element, b) {
-    renderMath(element);
-  });*/
 
   if (s9e && s9e.TextFormatter) {
     Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(s9e.TextFormatter, 'preview', function (original, preview, element) {
-      /*let finalEl = $(element).html();
-      let dst = finalEl.match(/\$\$(.*?)\$\$/g);
-      let src = preview.match(/\$\$(.*?)\$\$/g);
-       if(isArray(dst) && isArray(src)) {
-        for(let i = 0; i < dst.length; i++) {
-          $(element).html($(element).html().replace(dst[i], src[i]));
-        }
-      }*/
-      renderMath(element);
+      nextDraw = new Date().getTime() + 100;
     });
   }
 });
