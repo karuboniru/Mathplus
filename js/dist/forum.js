@@ -114,10 +114,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/components/CommentPost */ "flarum/components/CommentPost");
 /* harmony import */ var flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var flarum_components_TextEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/TextEditor */ "flarum/components/TextEditor");
-/* harmony import */ var flarum_components_TextEditor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_TextEditor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flarum_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/TextEditorButton */ "flarum/components/TextEditorButton");
-/* harmony import */ var flarum_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/components/DiscussionPage */ "flarum/components/DiscussionPage");
+/* harmony import */ var flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_components_TextEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/components/TextEditor */ "flarum/components/TextEditor");
+/* harmony import */ var flarum_components_TextEditor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_components_TextEditor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var flarum_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flarum/components/TextEditorButton */ "flarum/components/TextEditorButton");
+/* harmony import */ var flarum_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(flarum_components_TextEditorButton__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -127,6 +130,7 @@ var $ = __webpack_require__(/*! jquery */ "jquery");
 
 var mathLock = false;
 var nextDraw = 0;
+var head, script;
 
 function isArray(obj) {
   return !!obj && obj.constructor === Array;
@@ -134,7 +138,12 @@ function isArray(obj) {
 
 function renderMath() {
   if (window.hasOwnProperty('MathJax') && typeof MathJax.typeset === 'function') {
-    MathJax.typeset();
+    MathJax.typesetPromise().then(function () {
+      mathLock = false;
+    })["catch"](function (err) {
+      return console.log(err.message);
+    }); //MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
+
     mathLock = false;
   } else {
     mathLock = false;
@@ -142,20 +151,8 @@ function renderMath() {
   }
 }
 
-setInterval(function () {
-  var ts = new Date().getTime();
-
-  if (!mathLock && nextDraw < ts) {
-    nextDraw = ts + 20000;
-    mathLock = true;
-    renderMath();
-  }
-}, 100); // We provide our extension code in the form of an "initializer".
-// This is a callback that will run after the core has booted.
-
-app.initializers.add('our-extension', function (app) {
-  var head = document.getElementsByTagName("head")[0],
-      script;
+function loadMathJax() {
+  head = document.getElementsByTagName("head")[0];
   script = document.createElement("script");
   script.type = "text/x-mathjax-config";
   script[window.opera ? "innerHTML" : "text"] = "MathJax.Hub.Config({\n" + "  tex2jax: { inlineMath: [['$','$'], ['\\\\(','\\\\)']] }\n" + "});";
@@ -166,13 +163,65 @@ app.initializers.add('our-extension', function (app) {
   head.appendChild(script);
   window.MathJax = {
     tex: {
-      tags: 'ams'
+      tags: 'ams',
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
     }
   };
+}
+
+function resetMathJax() {
+  if (window.hasOwnProperty('MathJax')) {
+    head = document.getElementsByTagName("head")[0];
+    window.MathJax = false;
+    head.removeChild(script);
+  }
+}
+
+setInterval(function () {
+  var ts = new Date().getTime();
+
+  if (!mathLock && nextDraw < ts) {
+    nextDraw = ts + 20000;
+    mathLock = true;
+
+    try {
+      renderMath();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}, 100); // We provide our extension code in the form of an "initializer".
+// This is a callback that will run after the core has booted.
+
+app.initializers.add('our-extension', function (app) {
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'oncreate', function (original, element, b) {
+    nextDraw = new Date().getTime() + 100;
+  });
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'onbeforeupdate', function (original, element, b) {
+    nextDraw = new Date().getTime() + 100;
+  });
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'onupdate', function (original, element, b) {
+    nextDraw = new Date().getTime() + 100;
+  });
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'oninit', function (original, element, b) {
+    nextDraw = new Date().getTime() + 100;
+  });
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_CommentPost__WEBPACK_IMPORTED_MODULE_1___default.a.prototype, 'onbeforeremove', function (original, element, b) {
+    nextDraw = new Date().getTime() + 100;
+  });
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(flarum_components_DiscussionPage__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'oninit', function (original, element, b) {
+    resetMathJax();
+    loadMathJax();
+  });
 
   if (s9e && s9e.TextFormatter) {
     Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_0__["extend"])(s9e.TextFormatter, 'preview', function (original, preview, element) {
       nextDraw = new Date().getTime() + 100;
+      var el = $(element);
+
+      if (el.parent().hasClass('Post-body')) {
+        el.siblings().remove();
+      }
     });
   }
 });
@@ -198,6 +247,17 @@ module.exports = flarum.core.compat['common/extend'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['components/CommentPost'];
+
+/***/ }),
+
+/***/ "flarum/components/DiscussionPage":
+/*!******************************************************************!*\
+  !*** external "flarum.core.compat['components/DiscussionPage']" ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['components/DiscussionPage'];
 
 /***/ }),
 
