@@ -1,13 +1,13 @@
 {
     "name": "starsriver/mathplus",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "MathJax extension for flarum",
     "type": "flarum-extension",
     "require": {
         "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
     },
     "autoload": {
-        "psr-4": {"https://include.uotan.cn\": "src/"}
+        "psr-4": {"If\\FlaJax\\": "src/"}
     },
     "extra": {
         "flarum-extension": {
