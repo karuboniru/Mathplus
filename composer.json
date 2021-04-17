@@ -7,11 +7,11 @@
         "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
     },
     "autoload": {
-        "psr-4": {"https://include.uotan.cn": "src/"}
+        "psr-4": {"https://include.uotan.cn\": "src/"}
     },
     "extra": {
         "flarum-extension": {
-            "title": "FlaJax",
+            "title": "Mathplus",
             "icon": {
                 "name": "fas fa-smile",
                 "backgroundColor": "#238c59",
