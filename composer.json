@@ -1,10 +1,10 @@
 {
     "name": "starsriver/mathplus",
     "version": "0.1.1",
-    "description": "MathJax extension for flarum",
+    "description": "MathJax extension for flarum,more support.",
     "type": "flarum-extension",
     "require": {
-        "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
+        "flarum/core": ">=0.1.0-beta.16"
     },
     "autoload": {
         "psr-4": {"If\\FlaJax\\": "src/"}
@@ -15,7 +15,7 @@
             "icon": {
                 "name": "fas fa-smile",
                 "backgroundColor": "#238c59",
-                "color": "#fff"
+                "color": "#FF6688"
             }
         }
     }
