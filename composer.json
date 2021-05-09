@@ -1,6 +1,6 @@
 {
     "name": "starsriver/mathplus",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "MathJax extension for flarum,more support.",
     "type": "flarum-extension",
     "require": {
