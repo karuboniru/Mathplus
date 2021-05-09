@@ -4,7 +4,7 @@
  或
 [简体中文](https://github.com/StarsRivers/FlaJax/blob/main/READMECN.md)
 
-[包装专家](https://packagist.org/packages/starsriver/mathplus)
+[包装](https://packagist.org/packages/starsriver/mathplus)
 
 1.安装Mathplus插件
 ```
