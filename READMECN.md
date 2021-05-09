@@ -1,9 +1,10 @@
-# FlaJax
+# Mathplus
 
 [English](https://github.com/StarsRivers/FlaJax/blob/main/README.md)
  或
 [简体中文](https://github.com/StarsRivers/FlaJax/blob/main/READMECN.md)
 
+[包装专家](https://packagist.org/packages/starsriver/mathplus)
 1.安装Mathplus插件
 ```
 composer require starsriver/mathplus
@@ -29,4 +30,4 @@ $$
 ```
 这样，就可以通过使用Eq来引用它。`\ref{eqEmc}`.
 将{}与上标一起使用：`E=mc^{2}`如果您希望LaTeX正确处理上标。
-### Include社区(https://include.uotan.cn)
+### [Include社区](https://include.uotan.cn)
