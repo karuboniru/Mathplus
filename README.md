@@ -1,3 +1,5 @@
+[English](https://github.com/StarsRivers/FlaJax/README.md)
+[简体中文](https://github.com/StarsRivers/FlaJax/READMECN.md)
 # FlaJax
 
 1. Install flarum plugin with:
