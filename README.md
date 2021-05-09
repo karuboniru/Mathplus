@@ -7,7 +7,7 @@
 
 1. Install flarum plugin with:
 ```
-composer require if/flajax
+composer require starsriver/mathplus
 ```
 
 2. Enable plugin in flarum admin panel
