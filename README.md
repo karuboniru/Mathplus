@@ -1,4 +1,4 @@
-# FlaJax
+# Mathplus
 
 [English](https://github.com/StarsRivers/FlaJax/blob/main/README.md)
  or 
