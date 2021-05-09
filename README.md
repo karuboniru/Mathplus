@@ -32,4 +32,4 @@ $$
 * This way one can reference to it by using Eq. `\ref{eqEmc}`.
 Use {} with superscript: `E=mc^{2}` if you want proper superscripts handling by LaTeX.
 
-### Include社区(https://include.uotan.cn)
+### IncludeCommunity(https://include.uotan.cn)
