@@ -28,8 +28,8 @@
             "title": "Mathplus",
             "icon": {
                 "name": "fas fa-smile",
-                "backgroundColor": "#238c59",
-                "color": "#FF6688"
+                "backgroundColor": "#FF6688",
+                "color": "#fff"
             }
         }
     }
