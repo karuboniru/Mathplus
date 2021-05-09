@@ -2,7 +2,7 @@
 
 [English](https://github.com/StarsRivers/FlaJax/blob/main/README.md)
  or 
-[简体中文](https://github.com/StarsRivers/FlaJax/main/READMECN.md)
+[简体中文](https://github.com/StarsRivers/FlaJax/blob/main/READMECN.md)
 
 
 1. Install flarum plugin with:
