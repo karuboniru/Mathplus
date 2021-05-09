@@ -4,6 +4,7 @@
  or 
 [简体中文](https://github.com/StarsRivers/FlaJax/blob/main/READMECN.md)
 
+[Packaginst](https://packagist.org/packages/starsriver/mathplus)
 
 1. Install flarum plugin with:
 ```
@@ -32,4 +33,4 @@ $$
 * This way one can reference to it by using Eq. `\ref{eqEmc}`.
 Use {} with superscript: `E=mc^{2}` if you want proper superscripts handling by LaTeX.
 
-### IncludeCommunity(https://include.uotan.cn)
+### [IncludeCommunity](https://include.uotan.cn)
