@@ -2,7 +2,20 @@
     "name": "starsriver/mathplus",
     "version": "0.1.2",
     "description": "MathJax extension for flarum,more support.",
+    "keywords": [
+        "extension",
+        "math",
+        "mathjax"
+    ],
+    "license": "mit",
     "type": "flarum-extension",
+    "authors": [
+        {
+            "name": "星河",
+            "email": "weizixuan110@foxmail.com",
+            "homepage": "https://include.uotan.cn/"
+        }
+    ],
     "require": {
         "flarum/core": ">=0.1.0-beta.16"
     },
