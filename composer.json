@@ -3,6 +3,18 @@
     "version": "0.1.0",
     "description": "MathJax extension for flarum",
     "type": "flarum-extension",
+    "authors": [
+        {
+            "name": "Arek Tekieli",
+            "email": "arektekieli@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Instytut Fotonowy",
+            "email": "info@fotonowy.pl",
+            "homepage": "https://www.fotonowy.pl/"
+        }
+    ],
     "require": {
         "flarum/core": ">=0.1.0-beta.16 <=0.1.0"
     },
