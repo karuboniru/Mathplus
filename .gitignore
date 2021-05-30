@@ -1,2 +1,3 @@
 node_modules
-js/package-lock.json
+packet_doc.md
+run.sh
