@@ -142,8 +142,7 @@ function renderMath() {
       mathLock = false;
     })["catch"](function (err) {
       return console.log(err.message);
-    }); //MathJax.Hub.Queue(['Typeset', MathJax.Hub, element.dom]);
-
+    });
     mathLock = false;
   } else {
     mathLock = false;
