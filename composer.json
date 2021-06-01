@@ -25,7 +25,7 @@
         "flarum-extension": {
             "title": "FlaJax",
             "icon": {
-                "name": "fas fa-smile",
+                "name": "fas fa-square-root-alt",
                 "backgroundColor": "#238c59",
                 "color": "#fff"
             }
