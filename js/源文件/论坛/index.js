@@ -4,6 +4,7 @@ import DiscussionPage from 'flarum/components/DiscussionPage';
 import TextEditor from 'flarum/components/TextEditor';
 import TextEditorButton from 'flarum/components/TextEditorButton';
 
+
 var TurndownService = require('turndown').default;
 var turndownService = new TurndownService()
 
