@@ -1,12 +1,13 @@
 {
     "name": "starsriver/mathplus",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "description": "MathJax extension for flarum,more support.",
     "keywords": [
         "extension",
         "math",
         "mathjax",
-        "mathren"
+        "mathren",
+        "Katex"
     ],
     "license": "mit",
     "type": "flarum-extension",
