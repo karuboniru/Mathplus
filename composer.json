@@ -43,7 +43,7 @@
         "flarum-extension": {
             "title": "Mathplus",
             "icon": {
-                "name": "fas fa-square-root-alt",
+                "name": "fas-fa-square-root-alt",
                 "backgroundColor": "#FF6688",
                 "color": "#fff"
             }
