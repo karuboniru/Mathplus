@@ -27,7 +27,7 @@ $$
 \begin{equation}
 ...
 \label{eqEmc}
-\end[equation}
+\end{equation}
 $$
 ```
 * This way one can reference to it by using Eq. `\ref{eqEmc}`.
