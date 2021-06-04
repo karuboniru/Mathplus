@@ -26,7 +26,7 @@ $$
 \begin{equation}
 ...
 \label{eqEmc}
-\end[equation}
+\end{quation}
 $$
 ```
 这样，就可以通过使用Eq来引用它。`\ref{eqEmc}`.
