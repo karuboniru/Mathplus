@@ -13,6 +13,16 @@
     "type": "flarum-extension",
     "authors": [
         {
+            "name": "Arek Tekieli",
+            "email": "arektekieli@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Instytut Fotonowy",
+            "email": "info@fotonowy.pl",
+            "homepage": "https://www.fotonowy.pl/"
+        },
+        {
             "name": "Include社区",
             "email": "weizixuan110@foxmail.com",
             "homepage": "https://include.uotan.cn/"
