@@ -13,9 +13,14 @@
     "type": "flarum-extension",
     "authors": [
         {
-            "name": "星河",
+            "name": "Include社区",
             "email": "weizixuan110@foxmail.com",
             "homepage": "https://include.uotan.cn/"
+        },
+        {
+            "name": "星河",
+            "email": "weizixuan110@foxmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
