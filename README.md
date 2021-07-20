@@ -5,6 +5,7 @@
 [简体中文](https://github.com/StarsRivers/FlaJax/blob/main/READMECN.md)
 
 [Packaginst](https://packagist.org/packages/starsriver/mathplus)
+<br>
 
 1. Install flarum plugin with:
 ```
