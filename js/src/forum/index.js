@@ -67,8 +67,8 @@ function resetMathJax() {
 setInterval(() => {
     var ts = new Date().getTime();
     
-    if(!mathLock && nextDraw < ts) {
-        nextDraw = ts + 20000;
+    if(!mathLock && nextDraw < ts && nextDraw !== 0) {
+        nextDraw = 0;
         mathLock = true;
         try {
             renderMath();
@@ -87,11 +87,11 @@ app.initializers.add('our-extension', function(app) {
     });
     
     extend(CommentPost.prototype, 'onbeforeupdate', function (original, element, b) {
-        nextDraw = new Date().getTime() + 5000;
+        nextDraw = new Date().getTime() + 100;
     });
     
     extend(CommentPost.prototype, 'onupdate', function (original, element, b) {
-        nextDraw = new Date().getTime() + 5000;
+        nextDraw = new Date().getTime() + 100;
     });
     
     extend(CommentPost.prototype, 'oninit', function (original, element, b) {
@@ -99,7 +99,7 @@ app.initializers.add('our-extension', function(app) {
     });
     
     extend(CommentPost.prototype, 'onbeforeremove', function (original, element, b) {
-        nextDraw = new Date().getTime() + 5000;
+        nextDraw = new Date().getTime() + 100;
     });
     
     extend(DiscussionPage.prototype, 'oninit', function (original, element, b) {
