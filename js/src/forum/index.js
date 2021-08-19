@@ -36,7 +36,7 @@ function loadMathJax() {
     head.appendChild(script);
     script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+    script.src  = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
     head.appendChild(script);
     
     window.MathJax = {
@@ -45,6 +45,9 @@ function loadMathJax() {
                 'script', 'noscript', 'style', 'textarea', 'pre', 'annotation', 'annotation-xml'
             ]
         },
+        loader: {
+            load: ["ui/lazy"]
+        }, // lazy loading is supported in 3.2.0+
         tex: {
             tags: 'ams',
             displayMath: [['$$','$$'], ["\\[","\\]"], ['`$$','$$`']],
@@ -78,17 +81,17 @@ setInterval(() => {
 // We provide our extension code in the form of an "initializer".
 // This is a callback that will run after the core has booted.
 app.initializers.add('our-extension', function(app) {
-    
+    // don't update too frequently on comments
     extend(CommentPost.prototype, 'oncreate', function (original, element, b) {
         nextDraw = new Date().getTime() + 100;
     });
     
     extend(CommentPost.prototype, 'onbeforeupdate', function (original, element, b) {
-        nextDraw = new Date().getTime() + 100;
+        nextDraw = new Date().getTime() + 5000;
     });
     
     extend(CommentPost.prototype, 'onupdate', function (original, element, b) {
-        nextDraw = new Date().getTime() + 100;
+        nextDraw = new Date().getTime() + 5000;
     });
     
     extend(CommentPost.prototype, 'oninit', function (original, element, b) {
@@ -96,7 +99,7 @@ app.initializers.add('our-extension', function(app) {
     });
     
     extend(CommentPost.prototype, 'onbeforeremove', function (original, element, b) {
-        nextDraw = new Date().getTime() + 100;
+        nextDraw = new Date().getTime() + 5000;
     });
     
     extend(DiscussionPage.prototype, 'oninit', function (original, element, b) {
